@@ -151,11 +151,13 @@ while true do
   adversarial.test(valData)
   adversarial.plotSamples()
 
+  torch.setdefaulttensortype('torch.FloatTensor')
   -- plot accuracy of D
   trainLogger:style{['Disriminator mean class accuracy (train set)'] = '-'}
   testLogger:style{['Disriminator mean class accuracy (test set)'] = '-'}
   trainLogger:plot()
   testLogger:plot()
+  torch.setdefaulttensortype(defaulttype)
 
   for _, c in pairs(names) do
     configs[c].learningRate = math.max(configs[c].learningRate / 1.0004, 0.000001)
